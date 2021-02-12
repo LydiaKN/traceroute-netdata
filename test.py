@@ -4,7 +4,7 @@ import sys
 
 def hi_file(name):
     f=open('/home/ubuntu/hi.txt','w')
-    f.write('Hello '+name)
+    f.write('Hello '+name+'\n')
     f.close()
 
 if len(sys.argv) > 1:
