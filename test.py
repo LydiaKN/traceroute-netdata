@@ -3,7 +3,7 @@
 import sys
 
 def hi_file(name):
-    f=open('/home/user/hi.txt','w')
+    f=open('/home/ubuntu/hi.txt','w')
     f.write('Hello '+name)
     f.close()
 
