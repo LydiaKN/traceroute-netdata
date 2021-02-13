@@ -15,7 +15,7 @@ def new_chart_alarm(address):
 
     address=address.replace('.','_')
     #ADDING THE REAL PATH LATER
-    dest=open("/home/ubuntu/dest"+address+".chart.py","w")#opening 
+    dest=open("/usr/libexec/netdata/python.d/dest"+address+".chart.py","w")#opening 
                                                                            #the new file named, 
                                                                            # dest<IP>.chart.py
 
