@@ -4,7 +4,7 @@ import sys
 
 def new_chart_alarm(address):
     #NEW CHART PART
-    source = open("/usr/libexec/netdata/python.d/route3.chart.py")#opening the original source file
+    source = open("/home/ubuntu/template.py")#opening the original source file
 
     string_list_src = source.readlines()#split the file to list of strings,every line of the file is 
                                         #an elemment of the string_list_src
@@ -14,8 +14,8 @@ def new_chart_alarm(address):
                                               #where the target IP is configured 
 
     address=address.replace('.','_')
-
-    dest=open("/usr/libexec/netdata/python.d/dest"+address+".chart.py","w")#opening 
+    #ADDING THE REAL PATH LATER
+    dest=open("/home/ubuntu/dest"+address+".chart.py","w")#opening 
                                                                            #the new file named, 
                                                                            # dest<IP>.chart.py
 
