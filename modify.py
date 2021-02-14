@@ -28,7 +28,7 @@ def new_chart_alarm(address):
     source.close()#closing the source file
     dest.close()#closing the new file
 
-    src_alarm = open("/etc/netdata/health.d/rtt.conf")#opening the .conf file of the initial alarm
+    src_alarm = open("/home/ubuntu/template.conf")#opening the .conf file of the initial alarm
 
     string_src_alarm = src_alarm.readlines()#split the file to list of strings,every line of the file is 
                                             #an elemment of the string_src_alarm
