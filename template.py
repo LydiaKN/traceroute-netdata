@@ -15,40 +15,54 @@ TRACE_COMMAND="traceroute -q 1 -I "+target
 priority = 90000
 update_every = 4
 
-
 def rtts_and_ips(output):#output is the output of the traceroute command
-    addr=''#this is a temporary variable, that will be used for appending an IP address to a list
-
+    
     ips=[]#ips:the known IPs of te devices which consist the route. When the IP is not known, there is a *, as in in the traceroute command output
     rtts_str=[]#rtts_str: the RTTs as a string, when RTT is not known, there is a * , as in the traceroute command output
+    #the lists: ips and rtts_str, are parallel
     
-
-     #the lists: ips and rtts_str, are parallel
+    annotations=['!X','!N','!P','!S','!F','!0','!1','!2','!3','!4','!5','!6','!7','!8','!9','!10','!11','!12','!13','!14','!15']
+     
+ 
 
     for i in range(1,len(output)):
 
         line=output[i].strip()#Remove spaces at the beginning and at the end of the string.This line is optional.
         line=line.split(" ")#split the string to a list of strings ,where there is a space
-
+        #print(line)
         if('*' not in line):#is there is no * we have the IP address and the RTT
-            addr=line[len(line)-3]#saving the IP address
-            ips.append(addr)#appending address to a list where all  addresses are
-        else:
-            ips.append('*')#appending * to a list where all  addresses are, in case we don't know the adress
+            for word in line:
+                digits = sum(characters.isdigit() for characters in word)#count the digits in a word
+                letters=sum(characters.isalpha() for characters in word)
+                #print(word)
+                if (word.count('.')==3 and letters==0):#condition for the IP address
+                    address=word
+                    if ('(' in word or ')' in word) :
+                        address=word[1:len(word)-1]
+                    
+                    
+                    
+                
+                if ((word.count('.')==1 or word.count(',')==1) and (digits==5 or digits==4)):
+                    time=word
+                    if 'ms' in word:
+                        time=word[:len(word)-2]
+                    if(',' in time):#this conditiion means that we have infos about time, because ',' indicates there is a number in output
+                        time=time.replace(',','.')#example:12,3ms-->12.3ms //useful for float convertion, because 
+                                                     #python recognizes as floats values only with '.'
+                    
 
-        if(',' in line[len(line)-1]):#this conditiion means that we have infos about time, because ',' indicates there is a number in output
-            line[len(line)-1]=line[len(line)-1].replace(',','.')#example:12,3ms-->12.3ms //useful for float convertion, because 
-                                                                #python recognizes as floats values only with '.'
+                                                               
+        else:     
+            address='*'
+            time='*'
+        for annotation in annotations:
+            if (annotation in line):
+                address=address+annotation 
         
-        temp=line[len(line)-1].split('ms')#this command creates temp, which is a list of 2 strings.
-                                          #It split the string into 2 strings where there is 'ms'. In case there is no
-                                          #'ms' in the initial string this line has no impact at all
-
-        rtts_str.append(temp[0])#temp[0] is the first part of the splitted string, so in case we know the RTT,temp[0] is a
-                                #plain float number,
-                                #in case we don't know the RTT is the initial * from traceroute output
-    
-
+        ips.append(address)
+        rtts_str.append(time)
+        
 
     return [rtts_str,ips]#return the lists
 
