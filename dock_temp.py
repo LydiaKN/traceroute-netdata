@@ -44,7 +44,7 @@ def rtts_and_ips(output):#output is the output of the traceroute command
                     
                     
                 
-                if ((word.count('.')==1 or word.count(',')==1) and (digits==5 or digits==4)):
+                if ((word.count('.')==1 or word.count(',')==1) and digits>=4 and letters==0):
                     time=word
                     if 'ms' in word:
                         time=word[:len(word)-2]
