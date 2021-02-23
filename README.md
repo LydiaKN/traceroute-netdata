@@ -13,8 +13,11 @@ The coding part of the charm is located at the reactive file, while there other 
 The charm3.py file uses the modify.py at a VNF instnance for creating new charts and corresponding alarms at netdata. 
 The charm3_b.py file is used as a charm for removing charts from the VNF. 
 
-Modify.py, template.py. template.conf are downloaded to the VDU(VM) of the VNF instance via cloud-init file, which is also part of the VNF package.
+The VNF package is uploaded as trace4_vnfd.tar.gz
+Modify.py, template.py. template.conf are downloaded to the VDU(VM) of the VNF instance via cloud-init file, which is also included at the VNF package.
 
 For the VDU, which is mentioned at the VNFD, an image with a pre-installed Netdata is used.
 
-NS package is also included.
+NS package is also included, uploaded as trace4_nsd.tar.gz. 
+
+
