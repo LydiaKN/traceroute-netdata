@@ -1,5 +1,5 @@
 # traceroute-netdata
-Display data from traceroute command at Netdata using Python Plugin
+A VNF that displays data from traceroute command at Netdata using Python Plugin.
 
 The template.py is the code when the data collection happens, while template.conf is the configuration file of the correspinding alarm.
 
