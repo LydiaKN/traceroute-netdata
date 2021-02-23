@@ -29,7 +29,8 @@ def rtts_and_ips(output):#output is the output of the traceroute command
 
         line=output[i].strip()#Remove spaces at the beginning and at the end of the string.This line is optional.
         line=line.split(" ")#split the string to a list of strings ,where there is a space
-        #print(line)
+        address=""
+        time=""
         if('*' not in line):#is there is no * we have the IP address and the RTT
             for word in line:
                 digits = sum(characters.isdigit() for characters in word)#count the digits in a word
@@ -43,7 +44,7 @@ def rtts_and_ips(output):#output is the output of the traceroute command
                     
                     
                 
-                if ((word.count('.')==1 or word.count(',')==1) and (digits==5 or digits==4)):
+                if ((word.count('.')==1 or word.count(',')==1) and digits>=4 and letters==0):
                     time=word
                     if 'ms' in word:
                         time=word[:len(word)-2]
@@ -59,9 +60,9 @@ def rtts_and_ips(output):#output is the output of the traceroute command
         for annotation in annotations:
             if (annotation in line):
                 address=address+annotation 
-        
-        ips.append(address)
-        rtts_str.append(time)
+        if(address!="" and time!=""):
+            ips.append(address)
+            rtts_str.append(time)
         
 
     return [rtts_str,ips]#return the lists
