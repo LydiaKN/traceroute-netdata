@@ -1,0 +1,18 @@
+traceroute:
+  description: "ctreate collector for the data of a  traceroute to an address"
+  params:
+    address:
+      description: "Targer IP address"
+      type: string
+      default: ""
+  required:
+  - address
+remove:
+  description: "delete collector for the data of a  traceroute to an address"
+  params:
+    address:
+      description: "Targer IP address"
+      type: string
+      default: ""
+  required:
+  - address

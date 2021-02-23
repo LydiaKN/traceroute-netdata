@@ -1,0 +1,4 @@
+name: charm3
+summary: 2-actions charm ,which creates and deletes a traceroue chart at Netdata
+maintainer: Lydia <Lydia@inspiron3543.station>
+series: ['xenial','bionic']
