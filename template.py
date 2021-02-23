@@ -211,22 +211,23 @@ class Service(SimpleService):
 
 
             else:
-                position=self.all_ips.index(ips[i])
-                if (float(rtts[i])<self.all_best[position]):#finding best rtt
-                    self.all_best[position]=float(rtts[i])
-                if (float(rtts[i])>self.all_worst[position]):#finding worst rtt
-                    self.all_worst[position]=float(rtts[i])
-                #calculating average rtt|| old avg:μ=Σ/n-1-->with the new nth value x, the new mean is: μ'=(Σ+x)/n-->μ'=(n*μ+x)/n
-                self.all_avg[position]=(self.all_avg[position]*(self.n-1)+float(rtts[i]))/self.n
-                #variance:Var(x)=E(x^2)-E(x)^2
-                self.all_avg_sq[position]=(self.all_avg_sq[position]*(self.n-1)+(float(rtts[i])**2))/self.n#E(x^2)
-                variance=self.all_avg_sq[position]-self.all_avg[position]**2
-                self.all_stdev[position]=math.sqrt(variance)#standard deviation
-                
-                best.append(self.all_best[position]) 
-                worst.append(self.all_worst[position]) 
-                avg.append(self.all_avg[position])
-                stdev.append(self.all_stdev[position])
+                if (ips[i]!='*'):
+                    position=self.all_ips.index(ips[i])
+                    if (float(rtts[i])<self.all_best[position]):#finding best rtt
+                        self.all_best[position]=float(rtts[i])
+                    if (float(rtts[i])>self.all_worst[position]):#finding worst rtt
+                        self.all_worst[position]=float(rtts[i])
+                    #calculating average rtt|| old avg:μ=Σ/n-1-->with the new nth value x, the new mean is: μ'=(Σ+x)/n-->μ'=(n*μ+x)/n
+                    self.all_avg[position]=(self.all_avg[position]*(self.n-1)+float(rtts[i]))/self.n
+                    #variance:Var(x)=E(x^2)-E(x)^2
+                    self.all_avg_sq[position]=(self.all_avg_sq[position]*(self.n-1)+(float(rtts[i])**2))/self.n#E(x^2)
+                    variance=self.all_avg_sq[position]-self.all_avg[position]**2
+                    self.all_stdev[position]=math.sqrt(variance)#standard deviation
+
+                    best.append(self.all_best[position]) 
+                    worst.append(self.all_worst[position]) 
+                    avg.append(self.all_avg[position])
+                    stdev.append(self.all_stdev[position])
 
         self.debug('stats')
         self.debug('best=',best)
