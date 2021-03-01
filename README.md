@@ -4,6 +4,7 @@ A VNF that displays data from traceroute command at Netdata using Python Plugin.
 The template.py is the code when the data collection happens, while template.conf is the configuration file of the correspinding alarm.
 
 The modify.py opens the template.py file, copies its content to a new file and replaces the target IP with the destination IP. Then, the new file is saved at the corresponding Python data collection directory. 
+In addition, modify.py opens the template.conf copies its content to a new file in orser to set an alert foe the new chart. Then, the new file is saved at the Netdata helath directory. 
 The intended IP is passed as an argument when the modify.py is executed. 
 
 Charm3 is a JUJU charm and it is used for creating actions allowing adding/removing trcaeroute-charts for new IPs. The actions take the address as a parameter and either creates or removes a chart. 
